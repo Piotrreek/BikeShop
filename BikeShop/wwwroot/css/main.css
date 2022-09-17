@@ -1,0 +1,255 @@
+﻿:root{
+    font-size: 62.5%;
+    --main-bg-color: #ebebeb;
+    --main-text-color: #000000;
+    --nav-bg-color: #c7c7c7;
+    --nav-link-hover-bg-color: #cccccc;
+    --nav-link-hover-text-color: #616161;
+    --search-bg-color: #d6d6d6;
+    --search-color: #000
+}
+:root[data-theme='dark']{
+    --main-bg-color: #222;
+    --main-text-color: #d1d1d1;
+    --nav-bg-color: #3b3a3a;
+    --nav-link-hover-bg-color: #636363;
+    --nav-link-hover-text-color: #adadad;
+    --search-bg-color: #636363;
+    --search-color: #d1d1d1;
+}
+::placeholder{
+    color: var(--main-text-color);
+}
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1.6rem;
+    background-color: var(--main-bg-color);
+    color: var(--main-text-color);
+    height: 100%;
+}
+
+body{
+    padding-bottom: 6rem;
+    position: relative;
+    min-height: 100%;
+}
+
+ul{
+    list-style-type: none;
+    font-size: 1.6rem;
+}
+
+a{
+    text-decoration: none;
+    color: var(--main-text-color);
+}
+
+h1{
+    font-size: 2.1rem;
+}
+
+h2{
+    font-size: 1.8rem;
+}
+
+main{
+    margin: 3rem 0;
+}
+
+header{
+    padding: 0.5rem 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.hide{
+    display: none;
+}
+
+.container{
+    width: 90%;
+    font-size: 1.6rem;
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+.logo{
+    width: 35%;
+}
+
+.logo-bar{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.search input{
+    width: 90%;
+    border: none;
+    outline: none;
+    background-color: var(--search-bg-color);
+    padding: 1rem 1rem;
+    border-radius: 10rem;
+    color: var(--search-color);
+}
+
+.buttons{
+    max-width: 500px;
+    min-width: 250px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+button{
+    font-size: 2.1rem;
+    border: none;
+    cursor: pointer;
+    padding: 1rem;
+    background-color: var(--main-bg-color);
+    transition: background-color 0.5s;
+    border-radius: 10rem;
+}
+
+button:hover{
+    background-color: var(--nav-link-hover-bg-color);
+}
+
+.burger{
+    background-color: var(--main-bg-color);
+    width: 4rem;
+    margin-left: 1rem;
+}
+
+.nav{
+    position: relative;
+    margin-top: 1rem;
+}
+
+nav{
+    position: absolute;
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 0.5s;
+    background-color: var(--nav-bg-color);
+    width: 100%;
+    border-radius: 2rem;
+}
+
+.nav-show{
+    transform: scaleY(1);
+}
+
+.nav-item{
+    padding: 0.6rem 1.5rem;
+}
+
+footer{
+    font-size: 1.6rem;
+    text-align: center;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    position: absolute;
+    padding: 1.5rem;
+}
+
+.fa-solid{
+    color: var(--main-text-color)
+}
+
+
+@media (min-width: 576px) { 
+    
+}
+
+
+@media (min-width: 768px) {
+    html{
+        font-size: 1.8rem;
+    }
+    h1{
+        font-size: 3.5rem;
+    }
+    h2{
+        font-size: 3.0rem;
+    }
+}
+
+@media (min-width: 992px) {
+    .logo{
+        width: 50%;
+    }
+    .logo-bar{
+        width: 50%;
+        max-width: 600px;
+    }
+    .burger{
+        display: none;
+    }
+    .switch-light-dark{
+        min-width: 5rem;
+    }
+    header{
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .nav{
+        position: static;
+        margin-top: 0;
+    }
+    nav{
+        position: static;
+        transform: scaleY(1);
+        background-color: var(--main-bg-color);
+        width: 100%;
+    }
+    
+    nav ul{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 2rem;
+    }
+    .nav-item{
+        transition: background-color 0.5s;
+        border-radius: 5rem;
+        margin-right: 0.5rem;
+    }
+    
+    .nav-item:last-child{
+        margin-right: 0;
+    }
+    .nav-item:hover{
+        background-color: var(--nav-link-hover-bg-color);
+    }
+}
+
+
+@media (min-width: 1200px) { 
+    
+}
+
+
+@media (min-width: 1400px) {
+    html{
+        font-size: 1.8rem;
+    }
+    h1{
+        font-size: 3.5rem;
+    }
+    h2{
+        font-size: 3.0rem;
+    }
+}
