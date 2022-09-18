@@ -60,16 +60,13 @@ h2{
 
 main{
     margin: 3rem 0;
+    position: relative;
 }
 
 header{
     padding: 0.5rem 0;
     display: flex;
     flex-direction: column;
-}
-
-.hide{
-    display: none;
 }
 
 .container{
@@ -167,6 +164,22 @@ footer{
 }
 
 
+.registerSuccessful{
+    width: 100%;
+    background-color: lightgreen;
+    border-radius: 2rem;
+    color: black;
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+    cursor: pointer;
+}
+
+
 @media (min-width: 576px) { 
     
 }
@@ -187,6 +200,8 @@ footer{
 @media (min-width: 992px) {
     .logo{
         width: 50%;
+        min-width: 185px;
+        max-width: 250px;
     }
     .logo-bar{
         width: 50%;
@@ -223,22 +238,32 @@ footer{
         font-size: 2rem;
     }
     .nav-item{
-        transition: background-color 0.5s;
-        border-radius: 5rem;
         margin-right: 0.5rem;
+        padding: 0;
     }
     
     .nav-item:last-child{
         margin-right: 0;
     }
-    .nav-item:hover{
+    .nav-item-anchor{
+        border-radius: 5rem;
+        transition: background-color 0.5s;
+        padding: 0.6rem 1.5rem;
+        cursor: pointer;
+    }
+    .nav-item-anchor:hover{
         background-color: var(--nav-link-hover-bg-color);
     }
 }
 
 
-@media (min-width: 1200px) { 
-    
+@media (min-width: 1200px) {
+    .buttons{
+        min-width: 350px;
+    }
+    .search{
+        width: 75%;
+    }
 }
 
 
@@ -252,4 +277,8 @@ footer{
     h2{
         font-size: 3.0rem;
     }
+}
+
+.hide{
+    display: none;
 }

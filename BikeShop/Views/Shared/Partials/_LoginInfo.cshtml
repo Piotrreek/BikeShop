@@ -1,0 +1,13 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using BikeShop.Entities
+@inject SignInManager<User> SignInManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <div class="nav-item nav-item-anchor">My Account</div>
+}
+else
+{
+    <li class="nav-item"><a class="nav-item-anchor" asp-controller="Account" asp-action="Register">Register</a></li>
+    <li class="nav-item"><a class="nav-item-anchor" asp-controller="Account" asp-action="Register">Sign in</a></li>
+}

@@ -6,6 +6,8 @@
     const nav = document.querySelector("nav")
     const faMoon = document.querySelector('.fa-moon')
     const faSun = document.querySelector('.fa-sun')
+    const registerSuccessful = document.querySelector('.registerSuccessful')
+    
 
     const checkTheme = () =>{
         if(localStorage.getItem("data-theme") === 'dark'){
@@ -19,6 +21,12 @@
         }
     }
     checkTheme()
+    
+    const removeRegisterInfo = () =>{
+        if(registerSuccessful != null){
+            registerSuccessful.classList.add('hide')
+        }
+    }
     
     const toggleBurger = () => {
         faBars.classList.toggle('hide')
@@ -46,7 +54,7 @@
             changeThemeToDark()
         }
     }
-    
+    registerSuccessful.addEventListener('click', removeRegisterInfo)
     burger.addEventListener('click', toggleBurger)
     switchThemeBtn.addEventListener('click', switchTheme)
 }
