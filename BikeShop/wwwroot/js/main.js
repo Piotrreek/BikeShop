@@ -54,7 +54,9 @@
             changeThemeToDark()
         }
     }
-    registerSuccessful.addEventListener('click', removeRegisterInfo)
+    if(registerSuccessful != null){
+        registerSuccessful.addEventListener('click', removeRegisterInfo)
+    }
     burger.addEventListener('click', toggleBurger)
     switchThemeBtn.addEventListener('click', switchTheme)
 }
