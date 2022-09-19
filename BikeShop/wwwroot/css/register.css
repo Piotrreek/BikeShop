@@ -34,6 +34,11 @@
     border-radius: 10rem;
     color: var(--search-color);
 }
+input:-webkit-autofill,
+input:-webkit-autofill:focus{
+    transition: background-color 600000s, color 600000s;
+}
+
 .btn{
     margin: 2rem auto 0;
     width: 150px;

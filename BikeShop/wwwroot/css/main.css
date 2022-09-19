@@ -133,6 +133,7 @@ button:hover{
 
 nav{
     position: absolute;
+    z-index: 1000;
     transform: scaleY(0);
     transform-origin: top;
     transition: transform 0.5s;
