@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BikeShop.Entities;
 
-public class BikeShopContext : IdentityDbContext<User>
+public class BikeShopContext : IdentityDbContext<User, Role, string>
 {
     public BikeShopContext(DbContextOptions<BikeShopContext> options) : base(options) { }
     

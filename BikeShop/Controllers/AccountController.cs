@@ -26,20 +26,36 @@ public class AccountController : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Register([FromForm]UserViewModel model)
     {
-        var validationResult = await _accountService.ValidateAsync(model, ModelState);
         
-        if (validationResult is false)
-            return View(model);
-        
-        var registerResult = await _accountService.RegisterUserAsync(model);
+        var registerResult = await _accountService.RegisterUserAsync(model, ModelState);
 
-        if (registerResult.Succeeded is false)
+        if (registerResult == false)
         {
-            registerResult.AddToModelState(ModelState);
             return View(model);
         }
 
         TempData["registerResult"] = true;
+        return RedirectToAction(nameof(HomeController.Index), "Home");
+    }
+
+    [HttpGet("login")]
+    public IActionResult Login()
+    {
+        // napisac metode co sprawdzi zalogowanie i wywali do index jest tak
+        return View();
+    }
+    
+    [ValidateAntiForgeryToken]
+    [HttpPost("login")]
+    public async Task<IActionResult> Login([FromForm]LoginViewModel model)
+    {
+        var loginResult = await _accountService.LoginAsync(model, ModelState);
+        
+        if (loginResult == false)
+        {
+            return View(model);
+        }
+        
         return RedirectToAction(nameof(HomeController.Index), "Home");
     }
 }

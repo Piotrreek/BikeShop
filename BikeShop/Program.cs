@@ -39,8 +39,13 @@ builder.Services.ConfigureApplicationCookie(config =>
 });
 
 builder.Services.AddScoped<IValidator<UserViewModel>, UserViewModelValidator>();
+builder.Services.AddScoped<IValidator<LoginViewModel>, LoginViewModelValidator>();
 
 builder.Services.AddScoped<IAccountService, AccountService>();
+
+
+builder.Services.AddScoped<IValidationService<UserViewModel>, ValidationService<UserViewModel>>();
+builder.Services.AddScoped<IValidationService<LoginViewModel>, ValidationService<LoginViewModel>>();
 
 var app = builder.Build();
 

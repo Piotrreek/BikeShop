@@ -1,0 +1,48 @@
+﻿@model LoginViewModel
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+@section Styles{
+    <link rel="stylesheet" href="~/css/register.css" asp-append-version="true"/>
+}
+
+<h1 class="page-info">Sign In</h1>
+<div class="form">
+    <form asp-controller="Account" asp-action="Login" method="post">
+        
+        <div class="validation-summary" asp-validation-summary="ModelOnly"></div>
+        
+        <div class="form-group">
+            <div class="form-group-desc">
+                <div>
+                    <label asp-for="UserName">Username:</label>
+                </div>
+                <span asp-validation-for="UserName"></span>
+            </div>
+
+            <input class="form-field" asp-for="UserName" placeholder="Username"/>
+        </div>
+
+        <div class="form-group">
+            <div class="form-group-desc">
+                <div>
+                    <label asp-for="Password">Password:</label>
+                </div>
+                <span asp-validation-for="Password"></span>
+            </div>
+            <input type="password" class="form-field" asp-for="Password" placeholder="Password"/>
+        </div>
+    
+        <div class="form-group">
+            <input type="submit" value="Sign in" class="form-field btn"/>
+        </div>
+    </form>
+    
+    <div class="form-group login-info">
+            <p>You do not have an account ?</p>
+            <a class="login-btn" asp-controller="Account" asp-action="Register">Register</a>
+        </div>
+
+</div>

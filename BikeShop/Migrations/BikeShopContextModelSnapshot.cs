@@ -37,7 +37,7 @@ namespace BikeShop.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
                 });
 
             modelBuilder.Entity("BikeShop.Entities.Color", b =>
@@ -55,7 +55,7 @@ namespace BikeShop.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Colors");
+                    b.ToTable("Colors", (string)null);
                 });
 
             modelBuilder.Entity("BikeShop.Entities.Photo", b =>
@@ -75,7 +75,7 @@ namespace BikeShop.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("Photos");
+                    b.ToTable("Photos", (string)null);
                 });
 
             modelBuilder.Entity("BikeShop.Entities.Product", b =>
@@ -131,7 +131,7 @@ namespace BikeShop.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Products");
+                    b.ToTable("Products", (string)null);
                 });
 
             modelBuilder.Entity("BikeShop.Entities.Tag", b =>
@@ -149,7 +149,7 @@ namespace BikeShop.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Tags");
+                    b.ToTable("Tags", (string)null);
                 });
 
             modelBuilder.Entity("BikeShop.Entities.User", b =>
