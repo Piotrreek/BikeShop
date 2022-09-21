@@ -1,7 +1,9 @@
 ﻿<header>
     <div class="logo-bar">
         <div class="logo">
-            <h1>Bike Shop</h1>
+            <a asp-controller="Home" asp-action="Index">
+                <h1>Bike Shop</h1>
+            </a>
         </div>
         
         <div class="buttons">
@@ -26,11 +28,12 @@
         
     </div>
     <div class="nav">
-        <nav>
-                <ul>
-                    <li class="nav-item"><a class="nav-item-anchor" asp-controller="Home" asp-action="Index">Link</a></li>
-                    <li class="nav-item"><a class="nav-item-anchor" asp-controller="Home" asp-action="Index">Link</a></li>
+        <nav class="nav-main">
+                <ul class="nav-main-ul">
+                    <li class="nav-item"><a class="nav-item-anchor" asp-controller="Home" asp-action="Index">Home</a></li>
+                    <li class="nav-item"><a class="nav-item-anchor" asp-controller="Home" asp-action="Index">Products</a></li>
                     <partial name="Partials/_LoginInfo"/>
+                    <partial name="Partials/_AdminTab"/>
                 </ul>
             </nav>
     </div>

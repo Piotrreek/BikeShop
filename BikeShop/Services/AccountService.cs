@@ -1,5 +1,7 @@
-﻿using AutoMapper;
+﻿using System.Security.Claims;
+using AutoMapper;
 using BikeShop.Entities;
+using BikeShop.Entities.Enums;
 using BikeShop.Extensions;
 using BikeShop.Interfaces;
 using BikeShop.Models;
@@ -17,28 +19,31 @@ public class AccountService : IAccountService
     private readonly IMapper _mapper;
     private readonly IValidationService<UserViewModel> _userViewModelValidator;
     private readonly IValidationService<LoginViewModel> _loginViewModelValidator;
+    private readonly IHttpContextAccessor _contextAccessor;
 
     public AccountService(
         UserManager<User> userManager,
         SignInManager<User> signInManager,
         IMapper mapper,
         IValidationService<UserViewModel> userViewModelValidator,
-        IValidationService<LoginViewModel> loginViewModelValidator)
+        IValidationService<LoginViewModel> loginViewModelValidator, 
+        IHttpContextAccessor contextAccessor)
     {
         _userManager = userManager;
         _signInManager = signInManager;
         _mapper = mapper;
         _userViewModelValidator = userViewModelValidator;
         _loginViewModelValidator = loginViewModelValidator;
+        _contextAccessor = contextAccessor;
     }
 
-    public async Task<bool> RegisterUserAsync(UserViewModel model, ModelStateDictionary modelState)
+    public async Task<IdentityResult> RegisterUserAsync(UserViewModel model, ModelStateDictionary modelState)
     {
         var validationResult = await _userViewModelValidator.ValidateAsync(model, modelState);
 
-        if (validationResult == false)
+        if (validationResult == ValidationResult.Fail)
         {
-            return false;
+            return IdentityResult.Failed();
         }
         
         var user = _mapper.Map<User>(model);
@@ -47,20 +52,18 @@ public class AccountService : IAccountService
         if (!result.Succeeded)
         {
             result.AddToModelState(modelState);
-            return false;
+            return IdentityResult.Failed();
         }
 
-        return true;
+        return IdentityResult.Success;
     }
 
     public async Task<bool> LoginAsync(LoginViewModel model, ModelStateDictionary modelState)
     {
         var validationResult = await _loginViewModelValidator.ValidateAsync(model, modelState);
-        
-        if (validationResult == false)
-        {
+
+        if (validationResult == ValidationResult.Fail)
             return false;
-        }
 
         var result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, true, false);
 
@@ -71,5 +74,15 @@ public class AccountService : IAccountService
         }
 
         return true;
+    }
+
+    public async Task SignOutAsync()
+    {
+        await _signInManager.SignOutAsync();
+    }
+
+    public bool IsAuthenticated()
+    {
+        return _signInManager.IsSignedIn(_contextAccessor.HttpContext.User);
     }
 }

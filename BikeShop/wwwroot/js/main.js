@@ -3,10 +3,12 @@
     const faXMark = document.querySelector(".fa-xmark")
     const burger = document.querySelector(".burger")
     const switchThemeBtn = document.querySelector(".switch-light-dark")
-    const nav = document.querySelector("nav")
+    const nav = document.querySelector(".nav-main")
     const faMoon = document.querySelector('.fa-moon')
     const faSun = document.querySelector('.fa-sun')
     const registerSuccessful = document.querySelector('.registerSuccessful')
+    const manageLi = document.querySelector('.manage')
+    const manageDiv = document.querySelector('.manage-div')
     
 
     const checkTheme = () =>{
@@ -44,6 +46,10 @@
         localStorage.setItem("data-theme", 'light') 
     }
     
+    const toggleManageNav = () => {
+        manageDiv.classList.toggle('nav-show')
+    }
+    
     const switchTheme = () =>{
         faMoon.classList.toggle('hide')
         faSun.classList.toggle('hide')
@@ -54,10 +60,14 @@
             changeThemeToDark()
         }
     }
+    
     if(registerSuccessful != null){
         registerSuccessful.addEventListener('click', removeRegisterInfo)
     }
+    
+    
     burger.addEventListener('click', toggleBurger)
     switchThemeBtn.addEventListener('click', switchTheme)
+    manageLi.addEventListener('click', toggleManageNav)
 }
 document.addEventListener("DOMContentLoaded", main);

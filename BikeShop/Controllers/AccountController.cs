@@ -2,6 +2,7 @@
 using BikeShop.Interfaces;
 using BikeShop.Models;
 using FluentValidation;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BikeShop.Controllers;
@@ -19,6 +20,9 @@ public class AccountController : Controller
     [HttpGet("register")]
     public IActionResult Register()
     {
+        if (_accountService.IsAuthenticated())
+            return RedirectToAction(nameof(HomeController.Index), "Home");
+        
         return View();
     }
     
@@ -26,10 +30,9 @@ public class AccountController : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Register([FromForm]UserViewModel model)
     {
-        
         var registerResult = await _accountService.RegisterUserAsync(model, ModelState);
 
-        if (registerResult == false)
+        if (registerResult == IdentityResult.Failed())
         {
             return View(model);
         }
@@ -41,7 +44,9 @@ public class AccountController : Controller
     [HttpGet("login")]
     public IActionResult Login()
     {
-        // napisac metode co sprawdzi zalogowanie i wywali do index jest tak
+        if (_accountService.IsAuthenticated())
+            return RedirectToAction(nameof(HomeController.Index), "Home");
+        
         return View();
     }
     
@@ -55,6 +60,14 @@ public class AccountController : Controller
         {
             return View(model);
         }
+        
+        return RedirectToAction(nameof(HomeController.Index), "Home");
+    }
+
+    [HttpPost("sign-out")]
+    public async Task<IActionResult> SignOut()
+    {
+        await _accountService.SignOutAsync();
         
         return RedirectToAction(nameof(HomeController.Index), "Home");
     }

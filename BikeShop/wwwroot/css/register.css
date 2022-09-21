@@ -82,10 +82,4 @@ span, .validation-summary{
         margin-bottom: 3rem;
         font-size: 1.4rem;
     }
-    ul li{
-        margin-bottom: 1rem;
-    }
-    uli li:last-child{
-        margin-bottom: 0;
-    }
 }

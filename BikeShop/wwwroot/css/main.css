@@ -45,7 +45,7 @@ ul{
     font-size: 1.6rem;
 }
 
-a{
+a,button{
     text-decoration: none;
     color: var(--main-text-color);
 }
@@ -61,6 +61,7 @@ h2{
 main{
     margin: 3rem 0;
     position: relative;
+    z-index: 0;
 }
 
 header{
@@ -129,6 +130,7 @@ button:hover{
 .nav{
     position: relative;
     margin-top: 1rem;
+    z-index: 1500;
 }
 
 nav{
@@ -148,6 +150,12 @@ nav{
 
 .nav-item{
     padding: 0.6rem 1.5rem;
+}
+
+.sign-out-btn{
+    padding: 0;
+    background-color: var(--nav-bg-color);
+    font-size: 1.6rem;
 }
 
 footer{
@@ -180,6 +188,31 @@ footer{
     cursor: pointer;
 }
 
+.manage{
+    position: relative;
+    cursor: pointer;
+    z-index: 1200;
+}
+
+.manage-div{
+    position: absolute;
+    transform: scaleY(0);
+    z-index: 1100;
+    padding: 0.5rem 0;
+    transition: transform 0.5s;
+    transform-origin: top;
+    background-color: var(--nav-bg-color);
+    width: 90%;
+    left: 1.5rem;
+    top: 3.5rem;
+    border-radius: 2rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.manage-div-anchor{
+    padding: 0.3rem 1.5rem;
+}
 
 @media (min-width: 576px) { 
     
@@ -243,6 +276,12 @@ footer{
         padding: 0;
     }
     
+    .sign-out-btn{
+        padding: 0;
+        background-color: var(--main-bg-color);
+        font-size: 2rem;
+    }
+    
     .nav-item:last-child{
         margin-right: 0;
     }
@@ -254,6 +293,19 @@ footer{
     }
     .nav-item-anchor:hover{
         background-color: var(--nav-link-hover-bg-color);
+    }
+
+    .manage-div{
+        z-index: 1100;
+        padding: 0.5rem 0;
+        width: 175px;
+        left: -10rem;
+        top: 4.5rem;
+        border-radius: 2rem;
+    }
+    
+    .manage-div-anchor{
+        z-index: 10000;
     }
 }
 
@@ -282,4 +334,8 @@ footer{
 
 .hide{
     display: none;
+}
+
+.nav-show{
+    transform: scaleY(1);
 }

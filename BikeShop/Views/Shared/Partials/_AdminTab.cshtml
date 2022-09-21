@@ -1,0 +1,33 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using BikeShop.Entities
+
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+@* @if (SignInManager.IsSignedIn(User) && await UserManager.IsInRoleAsync(await UserManager.GetUserAsync(User), "admin")) *@
+@* { *@
+@*     <li class="nav-item"> *@
+@*         <div class="nav-item-anchor">Manage</div> *@
+@*     </li> *@
+@* } *@
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <li class="nav-item manage">
+        Manage
+        <div class="manage-div">
+            <a class="manage-div-anchor" asp-controller="Home" asp-action="Index">
+                Link
+            </a>
+            
+            <a class="manage-div-anchor" asp-controller="Home" asp-action="Index">
+                Link
+            </a>
+            
+            <a class="manage-div-anchor" asp-controller="Home" asp-action="Index">
+                Link
+            </a>
+            
+        </div>
+    </li>
+}

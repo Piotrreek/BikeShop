@@ -1,4 +1,5 @@
-﻿using BikeShop.Models;
+﻿using BikeShop.Entities.Enums;
+using BikeShop.Models;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
@@ -7,7 +8,7 @@ namespace BikeShop.Extensions;
 
 public static class ValidationExtensions
 {
-    public static void AddToModelState(this ValidationResult result, ModelStateDictionary modelState) 
+    public static void AddToModelState(this FluentValidation.Results.ValidationResult result, ModelStateDictionary modelState) 
     {
         foreach (var error in result.Errors) 
         {
@@ -22,5 +23,4 @@ public static class ValidationExtensions
             modelState.AddModelError(error.Code, error.Description);
         }
     }
-    
 }

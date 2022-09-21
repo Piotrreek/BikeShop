@@ -1,12 +1,17 @@
-﻿using BikeShop.Extensions;
+﻿using BikeShop.Entities.Enums;
+using BikeShop.Extensions;
 using FluentValidation;
+using FluentValidation.Results;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+
+using ValidationResult = BikeShop.Entities.Enums.ValidationResult;
 
 namespace BikeShop.Services;
 
 public interface IValidationService<in T>
 {
-    Task<bool> ValidateAsync(T model, ModelStateDictionary modelState);
+    Task<ValidationResult> ValidateAsync(T model, ModelStateDictionary modelState);
 }
 
 public class ValidationService<T> : AbstractValidator<T>, IValidationService<T>
@@ -18,16 +23,17 @@ public class ValidationService<T> : AbstractValidator<T>, IValidationService<T>
         _validator = validator;
     }
     
-    public async Task<bool> ValidateAsync(T model, ModelStateDictionary modelState)
+    public async Task<ValidationResult> ValidateAsync(T model, ModelStateDictionary modelState)
     {
         var validationResult = await _validator.ValidateAsync(model);
         
         if (!validationResult.IsValid)
         {
             validationResult.AddToModelState(modelState);
-            return false;
+            return ValidationResult.Fail;
         }
+        
 
-        return true;
+        return ValidationResult.Success;
     }
 }
