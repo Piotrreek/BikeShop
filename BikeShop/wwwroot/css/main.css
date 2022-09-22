@@ -40,11 +40,6 @@ body{
     min-height: 100%;
 }
 
-ul{
-    list-style-type: none;
-    font-size: 1.6rem;
-}
-
 a,button{
     text-decoration: none;
     color: var(--main-text-color);
@@ -60,14 +55,12 @@ h2{
 
 main{
     margin: 3rem 0;
-    position: relative;
-    z-index: 0;
 }
 
 header{
-    padding: 0.5rem 0;
     display: flex;
     flex-direction: column;
+    position: relative;
 }
 
 .container{
@@ -113,12 +106,7 @@ button{
     cursor: pointer;
     padding: 1rem;
     background-color: var(--main-bg-color);
-    transition: background-color 0.5s;
     border-radius: 10rem;
-}
-
-button:hover{
-    background-color: var(--nav-link-hover-bg-color);
 }
 
 .burger{
@@ -127,35 +115,8 @@ button:hover{
     margin-left: 1rem;
 }
 
-.nav{
-    position: relative;
-    margin-top: 1rem;
-    z-index: 1500;
-}
-
-nav{
-    position: absolute;
-    z-index: 1000;
-    transform: scaleY(0);
-    transform-origin: top;
-    transition: transform 0.5s;
-    background-color: var(--nav-bg-color);
-    width: 100%;
-    border-radius: 2rem;
-}
-
-.nav-show{
-    transform: scaleY(1);
-}
-
-.nav-item{
-    padding: 0.6rem 1.5rem;
-}
-
-.sign-out-btn{
-    padding: 0;
-    background-color: var(--nav-bg-color);
-    font-size: 1.6rem;
+.fa-solid{
+    color: var(--main-text-color)
 }
 
 footer{
@@ -167,11 +128,6 @@ footer{
     position: absolute;
     padding: 1.5rem;
 }
-
-.fa-solid{
-    color: var(--main-text-color)
-}
-
 
 .registerSuccessful{
     width: 100%;
@@ -188,35 +144,61 @@ footer{
     cursor: pointer;
 }
 
-.manage{
+nav{
     position: relative;
-    cursor: pointer;
-    z-index: 1200;
 }
 
-.manage-div{
-    position: absolute;
-    transform: scaleY(0);
-    z-index: 1100;
-    padding: 0.5rem 0;
+.primary-nav{
+    top: 1rem;
     transition: transform 0.5s;
+    transform: scaleY(0);
     transform-origin: top;
-    background-color: var(--nav-bg-color);
-    width: 90%;
-    left: 1.5rem;
-    top: 3.5rem;
+    padding: 1rem 2rem;
     border-radius: 2rem;
-    display: flex;
+    width: 100%;
+    list-style-type: none;
+    position: absolute;
+    background-color: var(--nav-bg-color);
+}
+
+.primary-nav li {
+    min-height: 30px;
+}
+
+.nav-btn {
+    font-size: 1.6rem;
+    padding: 0;
+    background-color: var(--nav-bg-color);
+    width: 100%;
+}
+
+.padding {
+    padding: 0.7rem 0.5rem;
+}
+
+.secondary-nav-btn-1, .secondary-nav-btn-2 {
+    position: relative;
+}
+
+.secondary-nav-1, .secondary-nav-2 {
+    width: 150px;
+    position: absolute;
+    display: none;
     flex-direction: column;
+    left: 115px;
+    top: 0;
+    padding: 0.5rem 2rem;
+    border-radius: 2rem;
+    background-color: var(--search-bg-color);
 }
 
-.manage-div-anchor{
-    padding: 0.3rem 1.5rem;
+.secondary-nav-1 button {
+    background-color: var(--search-bg-color);
 }
 
-@media (min-width: 576px) { 
-    
-}
+
+
+
 
 
 @media (min-width: 768px) {
@@ -241,9 +223,7 @@ footer{
         width: 50%;
         max-width: 600px;
     }
-    .burger{
-        display: none;
-    }
+    
     .switch-light-dark{
         min-width: 5rem;
     }
@@ -252,62 +232,83 @@ footer{
         align-items: center;
         justify-content: space-between;
     }
-
-    .nav{
-        position: static;
-        margin-top: 0;
-    }
-    nav{
-        position: static;
-        transform: scaleY(1);
-        background-color: var(--main-bg-color);
-        width: 100%;
-    }
     
-    nav ul{
+    .burger{
+        display: none;
+    }
+
+
+
+
+    nav{
+        position: relative;
+        width: 48%;
+    }
+
+    .primary-nav{
+        transition: none;
+        transform: scaleY(1);
+        min-height: 47px;
+        padding: 0;
+        position: static;
         display: flex;
         flex-direction: row;
-        justify-content: space-between;
         align-items: center;
-        font-size: 2rem;
-    }
-    .nav-item{
-        margin-right: 0.5rem;
-        padding: 0;
-    }
-    
-    .sign-out-btn{
-        padding: 0;
+        justify-content: space-between;
         background-color: var(--main-bg-color);
-        font-size: 2rem;
-    }
-    
-    .nav-item:last-child{
-        margin-right: 0;
-    }
-    .nav-item-anchor{
-        border-radius: 5rem;
-        transition: background-color 0.5s;
-        padding: 0.6rem 1.5rem;
-        cursor: pointer;
-    }
-    .nav-item-anchor:hover{
-        background-color: var(--nav-link-hover-bg-color);
     }
 
-    .manage-div{
-        z-index: 1100;
-        padding: 0.5rem 0;
-        width: 175px;
-        left: -10rem;
-        top: 4.5rem;
-        border-radius: 2rem;
+    .primary-nav li {
+        min-height: 0;
+        width: 107px;
+        text-align: center;
     }
     
-    .manage-div-anchor{
-        z-index: 10000;
+    .primary-nav li a, .primary-nav li p{
+        cursor: pointer;
+        text-align: center;
+        padding: 0.5rem 1rem;
+        border-radius: 2rem;
+        transition: background-color 0.5s;
     }
+    
+    .primary-nav li a:hover, .primary-nav li p:hover {
+        background-color: var(--search-bg-color);
+    }
+    
+    .padding {
+        padding: 0;
+    }
+    
+    .secondary-nav-1, .secondary-nav-2 {
+        width: 120px;
+        left: -10px;
+        top: 45px;
+        padding: 0.5rem 1.5rem;
+        border-radius: 1rem;
+    }
+    
+    
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 @media (min-width: 1200px) {
@@ -338,4 +339,8 @@ footer{
 
 .nav-show{
     transform: scaleY(1);
+}
+
+.scn-nav-show{
+    display: flex;
 }

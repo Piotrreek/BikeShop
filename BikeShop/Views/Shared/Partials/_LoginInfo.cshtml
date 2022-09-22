@@ -4,18 +4,17 @@
 
 @if (SignInManager.IsSignedIn(User))
 {
-    <li class="nav-item">
-        <div class="nav-item-anchor">My Account</div>
-    </li>
-    
-    <li class="nav-item">
-        <form method="post" asp-controller="Account" asp-action="SignOut">
-            <button class="nav-item-anchor nav-item sign-out-btn" type="submit">Sign Out</button>
-        </form>
+    <li class="padding secondary-nav-btn-1">
+        <p>My Account</p>
+        <div class="secondary-nav-1">
+            <form method="post" asp-controller="Account" asp-action="SignOut">
+                <button class="nav-btn padding" type="submit">Sign Out</button>
+            </form>
+        </div>
     </li>
 }
 else
 {
-    <li class="nav-item"><a class="nav-item-anchor" asp-controller="Account" asp-action="Register">Register</a></li>
-    <li class="nav-item"><a class="nav-item-anchor" asp-controller="Account" asp-action="Login">Sign in</a></li>
+    <li><a class="padding" asp-controller="Account" asp-action="Register">Register</a></li>
+    <li><a class="padding" asp-controller="Account" asp-action="Login">Sign in</a></li>
 }

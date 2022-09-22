@@ -3,12 +3,14 @@
     const faXMark = document.querySelector(".fa-xmark")
     const burger = document.querySelector(".burger")
     const switchThemeBtn = document.querySelector(".switch-light-dark")
-    const nav = document.querySelector(".nav-main")
+    const nav = document.querySelector(".primary-nav")
+    const scnNav1 = document.querySelector(".secondary-nav-1")
+    const scnNav2 = document.querySelector(".secondary-nav-2")
+    const scnNavBtn1 = document.querySelector('.secondary-nav-btn-1')
+    const scnNavBtn2 = document.querySelector('.secondary-nav-btn-2')
     const faMoon = document.querySelector('.fa-moon')
     const faSun = document.querySelector('.fa-sun')
     const registerSuccessful = document.querySelector('.registerSuccessful')
-    const manageLi = document.querySelector('.manage')
-    const manageDiv = document.querySelector('.manage-div')
     
 
     const checkTheme = () =>{
@@ -35,6 +37,13 @@
         faXMark.classList.toggle('hide')
         nav.classList.toggle('nav-show')
     }
+    
+    const toggleSecondaryNav1 = () => {
+        scnNav1.classList.toggle('scn-nav-show')
+    }
+    const toggleSecondaryNav2 = () => {
+        scnNav2.classList.toggle('scn-nav-show')
+    }
 
     const changeThemeToDark = () => {
         document.documentElement.setAttribute("data-theme", "dark") 
@@ -44,10 +53,6 @@
     const changeThemeToLight = () => {
         document.documentElement.setAttribute("data-theme", "light") 
         localStorage.setItem("data-theme", 'light') 
-    }
-    
-    const toggleManageNav = () => {
-        manageDiv.classList.toggle('nav-show')
     }
     
     const switchTheme = () =>{
@@ -68,6 +73,8 @@
     
     burger.addEventListener('click', toggleBurger)
     switchThemeBtn.addEventListener('click', switchTheme)
-    manageLi.addEventListener('click', toggleManageNav)
+    scnNavBtn1.addEventListener('click', toggleSecondaryNav1)
+    scnNavBtn2.addEventListener('click', toggleSecondaryNav2)
+    
 }
 document.addEventListener("DOMContentLoaded", main);

@@ -9,9 +9,9 @@
         <div class="buttons">
             
             <div class="search">
-                        <form method="get">
-                            <input type="text" placeholder="Search"/>
-                        </form>
+                <form method="get">
+                    <input type="text" placeholder="Search"/>
+                </form>
             </div>
             
             <button class="switch-light-dark">
@@ -27,14 +27,14 @@
         </div>
         
     </div>
-    <div class="nav">
-        <nav class="nav-main">
-                <ul class="nav-main-ul">
-                    <li class="nav-item"><a class="nav-item-anchor" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li class="nav-item"><a class="nav-item-anchor" asp-controller="Home" asp-action="Index">Products</a></li>
-                    <partial name="Partials/_LoginInfo"/>
-                    <partial name="Partials/_AdminTab"/>
-                </ul>
-            </nav>
-    </div>
+    
+    <nav>
+        <ul class="primary-nav">
+            <li><a class="padding" asp-controller="Home" asp-action="Index">Home</a></li>
+            <li><a class="padding" asp-controller="Home" asp-action="Index">Products</a></li>
+            <partial name="Partials/_LoginInfo"/>
+            <partial name="Partials/_AdminTab"/>
+        </ul> 
+    </nav>
+    
 </header>

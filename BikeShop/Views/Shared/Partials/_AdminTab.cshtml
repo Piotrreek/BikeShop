@@ -13,21 +13,12 @@
 
 @if (SignInManager.IsSignedIn(User))
 {
-    <li class="nav-item manage">
-        Manage
-        <div class="manage-div">
-            <a class="manage-div-anchor" asp-controller="Home" asp-action="Index">
-                Link
-            </a>
-            
-            <a class="manage-div-anchor" asp-controller="Home" asp-action="Index">
-                Link
-            </a>
-            
-            <a class="manage-div-anchor" asp-controller="Home" asp-action="Index">
-                Link
-            </a>
-            
+    <li class="padding secondary-nav-btn-2 ">
+        <p>Manage</p>
+        <div class="secondary-nav-2">
+            <a class="padding" asp-controller="Home" asp-action="Index">Link</a>
+            <a class="padding" asp-controller="Home" asp-action="Index">Link</a>
+            <a class="padding" asp-controller="Home" asp-action="Index">Link</a>
         </div>
     </li>
 }
