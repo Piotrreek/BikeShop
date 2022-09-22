@@ -7,7 +7,7 @@ namespace BikeShop.Interfaces;
 
 public interface IAccountService
 {
-    Task<IdentityResult> RegisterUserAsync(UserViewModel model, ModelStateDictionary modelState);
+    Task<bool> RegisterUserAsync(UserViewModel model, ModelStateDictionary modelState);
     Task<bool> LoginAsync(LoginViewModel model, ModelStateDictionary modelState);
     Task SignOutAsync();
     bool IsAuthenticated();

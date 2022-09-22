@@ -1,7 +1,7 @@
 ﻿using System.Security.Claims;
 using AutoMapper;
 using BikeShop.Entities;
-using BikeShop.Entities.Enums;
+using BikeShop.Enums;
 using BikeShop.Extensions;
 using BikeShop.Interfaces;
 using BikeShop.Models;
@@ -37,13 +37,13 @@ public class AccountService : IAccountService
         _contextAccessor = contextAccessor;
     }
 
-    public async Task<IdentityResult> RegisterUserAsync(UserViewModel model, ModelStateDictionary modelState)
+    public async Task<bool> RegisterUserAsync(UserViewModel model, ModelStateDictionary modelState)
     {
         var validationResult = await _userViewModelValidator.ValidateAsync(model, modelState);
 
         if (validationResult == ValidationResult.Fail)
         {
-            return IdentityResult.Failed();
+            return false;
         }
         
         var user = _mapper.Map<User>(model);
@@ -52,10 +52,10 @@ public class AccountService : IAccountService
         if (!result.Succeeded)
         {
             result.AddToModelState(modelState);
-            return IdentityResult.Failed();
+            return false;
         }
 
-        return IdentityResult.Success;
+        return true;
     }
 
     public async Task<bool> LoginAsync(LoginViewModel model, ModelStateDictionary modelState)

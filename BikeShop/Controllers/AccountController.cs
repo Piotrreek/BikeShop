@@ -32,7 +32,7 @@ public class AccountController : Controller
     {
         var registerResult = await _accountService.RegisterUserAsync(model, ModelState);
 
-        if (registerResult == IdentityResult.Failed())
+        if (registerResult == false)
         {
             return View(model);
         }

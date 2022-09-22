@@ -1,11 +1,11 @@
-﻿using BikeShop.Entities.Enums;
+﻿using BikeShop.Enums;
 using BikeShop.Extensions;
 using FluentValidation;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-using ValidationResult = BikeShop.Entities.Enums.ValidationResult;
+using ValidationResult = BikeShop.Enums.ValidationResult;
 
 namespace BikeShop.Services;
 

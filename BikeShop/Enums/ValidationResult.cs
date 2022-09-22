@@ -1,4 +1,4 @@
-﻿namespace BikeShop.Entities.Enums;
+﻿namespace BikeShop.Enums;
 
 public enum ValidationResult
 {
