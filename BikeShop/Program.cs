@@ -1,9 +1,8 @@
 using BikeShop.Entities;
-using BikeShop.Interfaces;
 using BikeShop.Models;
-using BikeShop.Models.Validators;
 using BikeShop.Services;
 using FluentValidation;
+using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -38,12 +37,9 @@ builder.Services.ConfigureApplicationCookie(config =>
     config.LoginPath = "/account/login";
 });
 
-builder.Services.AddScoped<IValidator<UserViewModel>, UserViewModelValidator>();
-builder.Services.AddScoped<IValidator<LoginViewModel>, LoginViewModelValidator>();
+builder.Services.AddMediatR(typeof(Program));
 
-builder.Services.AddScoped<IAccountService, AccountService>();
-
-
+builder.Services.AddValidatorsFromAssemblyContaining<Program>();
 builder.Services.AddScoped<IValidationService<UserViewModel>, ValidationService<UserViewModel>>();
 builder.Services.AddScoped<IValidationService<LoginViewModel>, ValidationService<LoginViewModel>>();
 

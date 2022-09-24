@@ -1,8 +1,7 @@
-﻿using BikeShop.Extensions;
-using BikeShop.Interfaces;
+﻿using BikeShop.Commands;
 using BikeShop.Models;
-using FluentValidation;
-using Microsoft.AspNetCore.Identity;
+using BikeShop.Queries;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BikeShop.Controllers;
@@ -10,53 +9,57 @@ namespace BikeShop.Controllers;
 [Route("account")]
 public class AccountController : Controller
 {
-    private readonly IAccountService _accountService;
+    private readonly IMediator _mediator;
 
-    public AccountController(IAccountService accountService, IValidator<UserViewModel> userValidator)
+    public AccountController(IMediator mediator)
     {
-        _accountService = accountService;
+        _mediator = mediator;
     }
 
     [HttpGet("register")]
-    public IActionResult Register()
+    public async Task<IActionResult> Register()
     {
-        if (_accountService.IsAuthenticated())
-            return RedirectToAction(nameof(HomeController.Index), "Home");
+        var query = new CheckIfUserIsSignedInQuery();
+        var response = await _mediator.Send(query);
         
-        return View();
+        return response == true 
+            ? RedirectToAction(nameof(HomeController.Index), "Home")
+            : View();
     }
     
     [HttpPost("register")]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Register([FromForm]UserViewModel model)
     {
-        var registerResult = await _accountService.RegisterUserAsync(model, ModelState);
-
-        if (registerResult == false)
-        {
+        var command = new RegisterUserCommand(model, ModelState);
+        var response = await _mediator.Send(command);
+        
+        if (response == false)
             return View(model);
-        }
-
+        
         TempData["registerResult"] = true;
         return RedirectToAction(nameof(HomeController.Index), "Home");
     }
 
     [HttpGet("login")]
-    public IActionResult Login()
+    public async Task<IActionResult> Login()
     {
-        if (_accountService.IsAuthenticated())
-            return RedirectToAction(nameof(HomeController.Index), "Home");
+        var query = new CheckIfUserIsSignedInQuery();
+        var response = await _mediator.Send(query);
         
-        return View();
+        return response == true 
+            ? RedirectToAction(nameof(HomeController.Index), "Home")
+            : View();
     }
     
     [ValidateAntiForgeryToken]
     [HttpPost("login")]
     public async Task<IActionResult> Login([FromForm]LoginViewModel model)
     {
-        var loginResult = await _accountService.LoginAsync(model, ModelState);
+        var command = new LoginUserCommand(model, ModelState);
+        var response = await _mediator.Send(command);
         
-        if (loginResult == false)
+        if (response == false)
         {
             return View(model);
         }
@@ -65,10 +68,11 @@ public class AccountController : Controller
     }
 
     [HttpPost("sign-out")]
-    public async Task<IActionResult> SignOut()
+    public new async Task<IActionResult> SignOut()
     {
-        await _accountService.SignOutAsync();
-        
+        var command = new SignOutUserCommand();
+        await _mediator.Send(command);
+
         return RedirectToAction(nameof(HomeController.Index), "Home");
     }
 }
