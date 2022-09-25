@@ -1,0 +1,11 @@
+﻿@model CategorySelectListViewModel 
+
+<div class="form-group">
+    <div class="form-group-desc">
+        <div>
+            <label asp-for="CategoryId">Category:</label>
+        </div>
+        <span asp-validation-for="CategoryId"></span>
+    </div>
+    <select class="form-field" asp-for="CategoryId" asp-items="Model.SelectList"> </select> 
+</div>

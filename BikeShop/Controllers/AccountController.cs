@@ -60,9 +60,8 @@ public class AccountController : Controller
         var response = await _mediator.Send(command);
         
         if (response == false)
-        {
             return View(model);
-        }
+        
         
         return RedirectToAction(nameof(HomeController.Index), "Home");
     }

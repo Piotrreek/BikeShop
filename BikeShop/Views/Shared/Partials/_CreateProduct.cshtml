@@ -1,0 +1,94 @@
+﻿@model CreateProductViewModel
+
+<div class="form-group">
+    <div class="form-group-desc">
+        <div>
+            <label asp-for="Name">Name:</label>
+        </div>
+        <span asp-validation-for="Name"></span>
+    </div>
+
+    <input class="form-field" asp-for="Name" placeholder="Name"/>
+</div>
+
+<div class="form-group">
+    <div class="form-group-desc">
+        <div>
+            <label asp-for="Price">Price:</label>
+        </div>
+        <span asp-validation-for="Price"></span>
+    </div>
+
+    <input class="form-field" asp-for="Price" placeholder="0"/>
+</div>
+
+<div class="form-group">
+    <div class="form-group-desc">
+        <div>
+            <label asp-for="Brand">Brand:</label>
+        </div>
+        <span asp-validation-for="Brand"></span>
+    </div>
+
+    <input class="form-field" asp-for="Brand" placeholder="Brand"/>
+</div>
+
+<div class="form-group">
+    <div class="form-group-desc">
+        <div>
+            <label asp-for="Description">Description:</label>
+        </div>
+        <span asp-validation-for="Description"></span>
+    </div>
+
+    <input class="form-field" asp-for="Description" placeholder="Description"/>
+</div>
+
+<div class="form-group check-box">
+    <label class="check-box-label" asp-for="InStock">In Stock:</label>
+    <input class="form-field" asp-for="InStock"/>
+</div>
+
+<div class="form-group">
+    <div class="form-group-desc">
+        <div>
+            <label asp-for="AvailableQuantity">Available Quantity:</label>
+        </div>
+        <span asp-validation-for="AvailableQuantity"></span>
+    </div>
+
+    <input class="form-field" asp-for="AvailableQuantity" disabled value="0"/>
+</div>
+
+<div class="form-group">
+    <div class="form-group-desc">
+        <div>
+            <label asp-for="Tags">Tags:</label>
+        </div>
+        <span asp-validation-for="Tags"></span>
+    </div>
+
+    <input class="form-field" asp-for="Tags" placeholder="bike,mountainbike"/>
+</div>
+
+<div class="form-group">
+    <div class="form-group-desc">
+        <div>
+            <label asp-for="Thumbnail">Thumbnail:</label>
+        </div>
+        <span asp-validation-for="Thumbnail"></span>
+    </div>
+
+    <input class="form-field" asp-for="Thumbnail"/>
+</div>
+
+<div class="form-group">
+    <div class="form-group-desc">
+        <div>
+            <label asp-for="Photos">Photos:</label>
+        </div>
+        <span asp-validation-for="Photos"></span>
+    </div>
+
+    <input class="form-field" asp-for="Photos"/>
+</div>

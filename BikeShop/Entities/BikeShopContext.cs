@@ -8,7 +8,7 @@ public class BikeShopContext : IdentityDbContext<User, Role, string>
     public BikeShopContext(DbContextOptions<BikeShopContext> options) : base(options) { }
     
     public DbSet<Product> Products { get; set; }
-    public DbSet<MountainBike> MountainBikes { get; set; }
+    public DbSet<Bike> Bikes { get; set; }
     public DbSet<Category> Categories { get; set; }
     public DbSet<Photo> Photos { get; set; }
     public DbSet<Tag> Tags { get; set; }

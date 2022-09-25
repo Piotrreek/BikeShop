@@ -196,6 +196,66 @@ nav{
     background-color: var(--search-bg-color);
 }
 
+.form-group{
+    padding: 1rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.form-field{
+    background-color: var(--search-bg-color);
+    border: none;
+    outline: none;
+    padding: 1rem 1rem;
+    border-radius: 10rem;
+    color: var(--search-color);
+}
+input:-webkit-autofill,
+input:-webkit-autofill:focus{
+    transition: background-color 600000s, color 600000s;
+}
+
+.btn{
+    margin: 2rem auto 0;
+    width: 150px;
+    cursor: pointer;
+}
+.page-info{
+    margin-bottom: 2rem;
+    text-align: center;
+}
+.login-info{
+    justify-content: space-around;
+}
+.login-btn{
+    text-align: center;
+    width: 100px;
+    padding: 1rem 1rem;
+    border-radius: 10rem;
+    background-color: var(--search-bg-color);
+}
+span, .validation-summary{
+    color: red;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+.validation-summary ul {
+    list-style-type: none;
+}
+.form-group-desc{
+    flex-basis: 30%;
+}
+
+.check-box {
+    justify-content: center;
+}
+
+.check-box-label {
+    padding-right: 2rem;
+}
+
 
 
 
@@ -210,6 +270,20 @@ nav{
     }
     h2{
         font-size: 3.0rem;
+    }
+    .form-group{
+        justify-content: center;
+    }
+    .login-btn{
+        margin-left: 3rem;
+    }
+    span{
+        font-size: 1.4rem;
+    }
+    .validation-summary{
+        text-align: center;
+        margin-bottom: 3rem;
+        font-size: 1.4rem;
     }
 }
 
@@ -343,4 +417,14 @@ nav{
 
 .scn-nav-show{
     display: flex;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
 }

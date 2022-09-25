@@ -35,9 +35,44 @@ namespace BikeShop.Migrations
                         .HasMaxLength(15)
                         .HasColumnType("nvarchar(15)");
 
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.ToTable("Categories", (string)null);
+                    b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Mountain Bike",
+                            Type = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Road Bike",
+                            Type = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "BMX Bike",
+                            Type = 1
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Gravel Bike",
+                            Type = 1
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Electric Bike",
+                            Type = 1
+                        });
                 });
 
             modelBuilder.Entity("BikeShop.Entities.Color", b =>
@@ -55,7 +90,7 @@ namespace BikeShop.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Colors", (string)null);
+                    b.ToTable("Colors");
                 });
 
             modelBuilder.Entity("BikeShop.Entities.Photo", b =>
@@ -63,6 +98,9 @@ namespace BikeShop.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsThumbnail")
+                        .HasColumnType("bit");
 
                     b.Property<string>("PhotoPath")
                         .IsRequired()
@@ -75,7 +113,7 @@ namespace BikeShop.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("Photos", (string)null);
+                    b.ToTable("Photos");
                 });
 
             modelBuilder.Entity("BikeShop.Entities.Product", b =>
@@ -131,7 +169,36 @@ namespace BikeShop.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Products", (string)null);
+                    b.HasIndex("ColorId");
+
+                    b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("BikeShop.Entities.Role", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasDatabaseName("RoleNameIndex")
+                        .HasFilter("[NormalizedName] IS NOT NULL");
+
+                    b.ToTable("AspNetRoles", (string)null);
                 });
 
             modelBuilder.Entity("BikeShop.Entities.Tag", b =>
@@ -149,7 +216,7 @@ namespace BikeShop.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Tags", (string)null);
+                    b.ToTable("Tags");
                 });
 
             modelBuilder.Entity("BikeShop.Entities.User", b =>
@@ -221,48 +288,6 @@ namespace BikeShop.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
-                });
-
-            modelBuilder.Entity("ColorProduct", b =>
-                {
-                    b.Property<int>("ColorsId")
-                        .HasColumnType("int");
-
-                    b.Property<Guid>("ProductsId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("ColorsId", "ProductsId");
-
-                    b.HasIndex("ProductsId");
-
-                    b.ToTable("ProductColor", (string)null);
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("NormalizedName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedName")
-                        .IsUnique()
-                        .HasDatabaseName("RoleNameIndex")
-                        .HasFilter("[NormalizedName] IS NOT NULL");
-
-                    b.ToTable("AspNetRoles", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -386,9 +411,12 @@ namespace BikeShop.Migrations
                     b.ToTable("ProductTag", (string)null);
                 });
 
-            modelBuilder.Entity("BikeShop.Entities.MountainBike", b =>
+            modelBuilder.Entity("BikeShop.Entities.Bike", b =>
                 {
                     b.HasBaseType("BikeShop.Entities.Product");
+
+                    b.Property<int>("Gender")
+                        .HasColumnType("int");
 
                     b.Property<string>("ProductionYear")
                         .IsRequired()
@@ -398,7 +426,7 @@ namespace BikeShop.Migrations
                     b.Property<int>("Size")
                         .HasColumnType("int");
 
-                    b.ToTable("MountainBikes", (string)null);
+                    b.ToTable("Bikes", (string)null);
                 });
 
             modelBuilder.Entity("BikeShop.Entities.Photo", b =>
@@ -420,27 +448,20 @@ namespace BikeShop.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("BikeShop.Entities.Color", "Color")
+                        .WithMany("Products")
+                        .HasForeignKey("ColorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Category");
-                });
 
-            modelBuilder.Entity("ColorProduct", b =>
-                {
-                    b.HasOne("BikeShop.Entities.Color", null)
-                        .WithMany()
-                        .HasForeignKey("ColorsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("BikeShop.Entities.Product", null)
-                        .WithMany()
-                        .HasForeignKey("ProductsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("Color");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                    b.HasOne("BikeShop.Entities.Role", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -467,7 +488,7 @@ namespace BikeShop.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                    b.HasOne("BikeShop.Entities.Role", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -504,16 +525,21 @@ namespace BikeShop.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("BikeShop.Entities.MountainBike", b =>
+            modelBuilder.Entity("BikeShop.Entities.Bike", b =>
                 {
                     b.HasOne("BikeShop.Entities.Product", null)
                         .WithOne()
-                        .HasForeignKey("BikeShop.Entities.MountainBike", "Id")
+                        .HasForeignKey("BikeShop.Entities.Bike", "Id")
                         .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
                 });
 
             modelBuilder.Entity("BikeShop.Entities.Category", b =>
+                {
+                    b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("BikeShop.Entities.Color", b =>
                 {
                     b.Navigation("Products");
                 });

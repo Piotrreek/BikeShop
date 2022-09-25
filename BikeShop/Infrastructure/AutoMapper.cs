@@ -9,6 +9,6 @@ public class AutoMapper : Profile
     public AutoMapper()
     {
         CreateMap<UserViewModel, User>();
-
+        CreateMap<CreateBikeViewModel, Bike>();
     }
 }

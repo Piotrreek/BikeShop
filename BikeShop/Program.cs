@@ -1,5 +1,8 @@
+using Azure.Storage.Blobs;
 using BikeShop.Entities;
+using BikeShop.Extensions;
 using BikeShop.Models;
+using BikeShop.Repositories;
 using BikeShop.Services;
 using FluentValidation;
 using MediatR;
@@ -9,7 +12,10 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews(config =>
+{
+    config.ModelBinderProviders.Insert(0, new InvariantDecimalModelBinderProvider());
+});
 #if DEBUG
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 #endif
@@ -42,6 +48,13 @@ builder.Services.AddMediatR(typeof(Program));
 builder.Services.AddValidatorsFromAssemblyContaining<Program>();
 builder.Services.AddScoped<IValidationService<UserViewModel>, ValidationService<UserViewModel>>();
 builder.Services.AddScoped<IValidationService<LoginViewModel>, ValidationService<LoginViewModel>>();
+builder.Services.AddScoped<IValidationService<CreateBikeViewModel>, ValidationService<CreateBikeViewModel>>();
+
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<IBikeRepository, BikeRepository>();
+
+builder.Services.AddScoped<IAzureBlobService, AzureBlobService>();
+builder.Services.AddScoped(x => new BlobServiceClient(builder.Configuration.GetValue<string>("ConnectionStrings:AzureBlobContainer")));
 
 var app = builder.Build();
 

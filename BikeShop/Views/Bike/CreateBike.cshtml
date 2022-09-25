@@ -1,0 +1,69 @@
+﻿@model CreateBikeViewModel
+
+@{
+    ViewData["Title"] = "Create Bike";
+}
+
+
+<h1 class="page-info">Create Bike</h1>
+<div class="form">
+    <form asp-controller="Bike" asp-action="CreateBike" method="post">
+        
+        <div class="validation-summary" asp-validation-summary="ModelOnly"></div>
+
+        @await Component.InvokeAsync("CategorySelectList", new {categoryType = 1})
+
+        <div class="form-group">
+            <div class="form-group-desc">
+                <div>
+                    <label asp-for="Color">Color:</label>
+                </div>
+                <span asp-validation-for="Color"></span>
+            </div>
+        
+            <input class="form-field" asp-for="Color"/>
+        </div>
+        
+        <div class="form-group">
+            <div class="form-group-desc">
+                <div>
+                    <label asp-for="Size">Size:</label>
+                </div>
+                <span asp-validation-for="Size"></span>
+            </div>
+        
+            <input class="form-field" asp-for="Size"/>
+        </div>
+        
+        <div class="form-group">
+            <div class="form-group-desc">
+                <div>
+                    <label asp-for="UserGender">User Gender:</label>
+                </div>
+                <span asp-validation-for="UserGender"></span>
+            </div>
+        
+            <input class="form-field" asp-for="UserGender"/>
+        </div>
+        
+        <div class="form-group">
+            <div class="form-group-desc">
+                <div>
+                    <label asp-for="ProductionYear">Production Year:</label>
+                </div>
+                <span asp-validation-for="ProductionYear"></span>
+            </div>
+        
+            <input class="form-field" asp-for="ProductionYear" placeholder="2022"/>
+        </div>
+        
+        <partial name="Partials/_CreateProduct" model="Model"/>
+        
+        
+        <div class="form-group">
+            <input type="submit" value="Create" class="form-field btn"/>
+        </div>
+    </form>
+    <br/>
+    
+</div>
