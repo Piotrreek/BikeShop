@@ -3,11 +3,12 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace BikeShop.Entities.Configurations;
 
-public class MountainBikeConfiguration : IEntityTypeConfiguration<MountainBike>
+public class BikeConfiguration : IEntityTypeConfiguration<Bike>
 {
-    public void Configure(EntityTypeBuilder<MountainBike> mountainBike)
+    public void Configure(EntityTypeBuilder<Bike> mountainBike)
     {
-        mountainBike.ToTable("MountainBikes");
+        mountainBike.ToTable("Bikes");
+        mountainBike.Property(mb => mb.Gender).IsRequired();
         mountainBike.Property(mb => mb.Size).IsRequired();
         mountainBike.Property(mb => mb.ProductionYear).IsRequired().HasMaxLength(4);
     }

@@ -18,6 +18,6 @@ public abstract class Product
     public int CategoryId { get; set; }
     public ICollection<Tag> Tags { get; set; } = new List<Tag>();
     public int ColorId { get; set; }
-    public ICollection<Color> Colors { get; set; }
+    public Color Color { get; set; }
 
 }

@@ -30,8 +30,8 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
             .WithMany(p => p.Products)
             .UsingEntity(j => j.ToTable("ProductTag"));
 
-        product.HasMany(p => p.Colors)
+        product.HasOne(p => p.Color)
             .WithMany(c => c.Products)
-            .UsingEntity(j => j.ToTable("ProductColor"));
+            .HasForeignKey(p => p.ColorId);
     }
 }
