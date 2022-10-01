@@ -52,6 +52,9 @@ builder.Services.AddScoped<IValidationService<CreateBikeViewModel>, ValidationSe
 
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IBikeRepository, BikeRepository>();
+builder.Services.AddScoped<IColorRepository, ColorRepository>();
+builder.Services.AddScoped<IPhotoRepository, PhotoRepository>();
+builder.Services.AddScoped<ITagRepository, TagRepository>();
 
 builder.Services.AddScoped<IAzureBlobService, AzureBlobService>();
 builder.Services.AddScoped(x => new BlobServiceClient(builder.Configuration.GetValue<string>("ConnectionStrings:AzureBlobContainer")));

@@ -41,13 +41,16 @@ public class AzureBlobService : IAzureBlobService
 
         await using var data = blob.OpenReadStream();
 
-        await blobClient.UploadAsync(data);
+        await blobClient.UploadAsync(data, new BlobHttpHeaders
+        {
+            ContentType = $"image/jpeg"
+        });
     }
     
     
     private async Task<BlobContainerClient> GetContainerClientAsync()
     {
-        var blobContainerClient = _blobServiceClient.GetBlobContainerClient(_configuration["ConnectionStrings:AzureBlobContainer"]);
+        var blobContainerClient = _blobServiceClient.GetBlobContainerClient(_configuration["ConnectionStrings:AzureBlobContainerName"]);
 
         await blobContainerClient.CreateIfNotExistsAsync();
 

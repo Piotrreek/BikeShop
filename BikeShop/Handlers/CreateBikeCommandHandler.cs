@@ -12,14 +12,18 @@ namespace BikeShop.Handlers;
 public class CreateBikeCommandHandler : IRequestHandler<CreateBikeCommand, bool>
 {
     private readonly IBikeRepository _bikeRepository;
+    private readonly IPhotoRepository _photoRepository;
+    private readonly ITagRepository _tagRepository;
     private readonly IValidationService<CreateBikeViewModel> _validator;
     private readonly IMapper _mapper;
 
-    public CreateBikeCommandHandler(IBikeRepository bikeRepository, IValidationService<CreateBikeViewModel> validator, IMapper mapper)
+    public CreateBikeCommandHandler(IBikeRepository bikeRepository, IValidationService<CreateBikeViewModel> validator, IMapper mapper, IColorRepository colorRepository, IAzureBlobService azureBlobService, ITagRepository tagRepository, IPhotoRepository photoRepository)
     {
         _bikeRepository = bikeRepository;
         _validator = validator;
         _mapper = mapper;
+        _tagRepository = tagRepository;
+        _photoRepository = photoRepository;
     }
 
     public async Task<bool> Handle(CreateBikeCommand request, CancellationToken cancellationToken)
@@ -27,9 +31,21 @@ public class CreateBikeCommandHandler : IRequestHandler<CreateBikeCommand, bool>
         var validationResult = await _validator.ValidateAsync(request.Model, request.ModelState);
         if (validationResult == ValidationResult.Fail)
             return false;
-
+        
         var bike = _mapper.Map<Bike>(request.Model);
-        // teraz logika zeby dodac zdjecia i reszte propertasow
+        var tags = request.Model.TagList.Split(new[] { ',', ' ', ';' }).ToList();
+        
+        foreach (var tag in tags)
+        {
+            bike.Tags.Add(await _tagRepository.InsertTag(tag));
+        }
+
+        foreach (var photo in request.Model.FormPhotos)
+        {
+            bike.Photos.Add(await _photoRepository.UploadPhoto(photo));
+        }
+
+        await _bikeRepository.InsertBike(bike);
         
         return true;
     }

@@ -12,8 +12,8 @@ public abstract class CreateProductViewModel
     public bool InStock { get; set; }
     public int AvailableQuantity { get; set; }
     public string Brand { get; set; }
-    public string Tags { get; set; }
+    public string TagList { get; set; }
     public int CategoryId { get; set; }
     public IFormFile Thumbnail { get; set; }
-    public IFormFileCollection Photos { get; set; }
+    public IFormFileCollection FormPhotos { get; set; }
 }

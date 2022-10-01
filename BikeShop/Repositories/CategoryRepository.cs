@@ -18,8 +18,11 @@ public class CategoryRepository : ICategoryRepository
         _context = context;
     }
 
-    public async Task<List<Category>> GetCategoriesByCategoryTypeId(int categoryTypeId)
-    {
-        return await _context.Categories.Where(c => c.Type == (Type)categoryTypeId).ToListAsync();
-    }
+    public async Task<List<Category>> GetCategoriesByCategoryTypeId(int categoryTypeId) 
+        => await _context.Categories.Where(c => c.Type == (Type)categoryTypeId).ToListAsync();
+
+
+    public async Task<Category> GetCategoryById(int categoryId)
+        => await _context.Categories.FirstOrDefaultAsync(c => c.Id == categoryId);
+
 }

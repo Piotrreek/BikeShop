@@ -7,7 +7,7 @@
 
 <h1 class="page-info">Create Bike</h1>
 <div class="form">
-    <form asp-controller="Bike" asp-action="CreateBike" method="post">
+    <form asp-controller="Bike" asp-action="CreateBike" method="post" enctype="multipart/form-data">
         
         <div class="validation-summary" asp-validation-summary="ModelOnly"></div>
 
@@ -16,12 +16,12 @@
         <div class="form-group">
             <div class="form-group-desc">
                 <div>
-                    <label asp-for="Color">Color:</label>
+                    <label asp-for="ColorId">Color:</label>
                 </div>
-                <span asp-validation-for="Color"></span>
+                <span asp-validation-for="ColorId"></span>
             </div>
         
-            <input class="form-field" asp-for="Color"/>
+            <input class="form-field" asp-for="ColorId"/>
         </div>
         
         <div class="form-group">
