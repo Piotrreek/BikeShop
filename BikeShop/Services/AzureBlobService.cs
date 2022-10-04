@@ -43,7 +43,7 @@ public class AzureBlobService : IAzureBlobService
 
         await blobClient.UploadAsync(data, new BlobHttpHeaders
         {
-            ContentType = $"image/jpeg"
+            ContentType = blob.ContentType
         });
     }
     

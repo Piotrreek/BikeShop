@@ -20,5 +20,19 @@ public class CreateProductViewModelValidator<T> : AbstractValidator<T> where T :
         RuleFor(p => p.Brand)
             .NotEmpty().WithMessage("Insert brand of the product!");
         RuleFor(p => p.CategoryId).NotEmpty();
+        
+        RuleFor(p => p.FormPhotos)
+            .Must(files =>
+            {
+                if (files == null) return true;
+                foreach (var file in files)
+                {
+                    if (file.ContentType.Equals("image/jpeg") || file.ContentType.Equals("image/jpg") ||
+                        file.ContentType.Equals("image/png") == false) return false;
+                }
+
+                return true;
+            })
+            .WithMessage("Insert file with correct extension!");
     }
 }

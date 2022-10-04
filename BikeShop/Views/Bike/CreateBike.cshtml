@@ -13,17 +13,8 @@
 
         @await Component.InvokeAsync("CategorySelectList", new {categoryType = 1})
 
-        <div class="form-group">
-            <div class="form-group-desc">
-                <div>
-                    <label asp-for="ColorId">Color:</label>
-                </div>
-                <span asp-validation-for="ColorId"></span>
-            </div>
-        
-            <input class="form-field" asp-for="ColorId"/>
-        </div>
-        
+        @await Component.InvokeAsync("ColorSelectList")
+
         <div class="form-group">
             <div class="form-group-desc">
                 <div>

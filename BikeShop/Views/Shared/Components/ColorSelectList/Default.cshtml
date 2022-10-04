@@ -1,0 +1,11 @@
+﻿@model ColorSelectListViewModel
+
+<div class="form-group">
+    <div class="form-group-desc">
+        <div>
+            <label asp-for="ColorId">Color:</label>
+        </div>
+        <span asp-validation-for="ColorId"></span>
+    </div>
+    <select class="form-field" asp-for="ColorId" asp-items="Model.Items"> </select> 
+</div>

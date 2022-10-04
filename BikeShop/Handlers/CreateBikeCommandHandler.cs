@@ -36,17 +36,12 @@ public class CreateBikeCommandHandler : IRequestHandler<CreateBikeCommand, bool>
         var tags = request.Model.TagList.Split(new[] { ',', ' ', ';' }).ToList();
         
         foreach (var tag in tags)
-        {
             bike.Tags.Add(await _tagRepository.InsertTag(tag));
-        }
-
-        foreach (var photo in request.Model.FormPhotos)
-        {
-            bike.Photos.Add(await _photoRepository.UploadPhoto(photo));
-        }
-
-        await _bikeRepository.InsertBike(bike);
         
+        foreach (var photo in request.Model.FormPhotos ?? new FormFileCollection())
+            bike.Photos.Add(await _photoRepository.UploadPhoto(photo));
+        
+        await _bikeRepository.InsertBike(bike);
         return true;
     }
 }

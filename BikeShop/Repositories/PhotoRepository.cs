@@ -21,7 +21,7 @@ public class PhotoRepository : IPhotoRepository
 
     public async Task<Photo> UploadPhoto(IFormFile file, bool isThumbnail = false)
     {
-        var blobName = Guid.NewGuid().ToString().Replace('-', 'a') + Path.GetExtension(file.FileName);
+        var blobName = Guid.NewGuid().ToString().Replace('-', (char)new Random().Next(97, 122)) + Path.GetExtension(file.FileName);
         await _azureBlobService.UploadBlobAsync(blobName, file);
         
         var photo = new Photo
@@ -31,6 +31,7 @@ public class PhotoRepository : IPhotoRepository
         };
 
         await _context.Photos.AddAsync(photo);
+        await _context.SaveChangesAsync();
 
         return photo;
     }
