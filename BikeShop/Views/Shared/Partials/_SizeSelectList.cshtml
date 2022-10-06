@@ -1,0 +1,23 @@
+﻿@model SelectColorViewModel
+@{
+    var selectList = new List<SelectListItem>()
+    {
+        new SelectListItem("S", "1"),
+        new SelectListItem("M", "2"),
+        new SelectListItem("L", "3"),
+        new SelectListItem("XL", "4")
+    };
+    
+    
+}
+
+<div class="form-group">
+    <div class="form-group-desc">
+        <div>
+            <label asp-for="Size">Size:</label>
+        </div>
+        <span asp-validation-for="Size"></span>
+    </div>
+        
+    <select class="form-field" asp-for="Size" asp-items="selectList"> </select> 
+</div>

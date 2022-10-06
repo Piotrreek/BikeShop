@@ -7,6 +7,6 @@ public class Bike : Product, IProductionYear
 {
     
     public Size Size { get; set; }
-    public Gender Gender { get; set; }
+    public Gender UserGender { get; set; }
     public string ProductionYear { get; set; }
 }

@@ -17,7 +17,7 @@ public class CreateBikeCommandHandler : IRequestHandler<CreateBikeCommand, bool>
     private readonly IValidationService<CreateBikeViewModel> _validator;
     private readonly IMapper _mapper;
 
-    public CreateBikeCommandHandler(IBikeRepository bikeRepository, IValidationService<CreateBikeViewModel> validator, IMapper mapper, IColorRepository colorRepository, IAzureBlobService azureBlobService, ITagRepository tagRepository, IPhotoRepository photoRepository)
+    public CreateBikeCommandHandler(IBikeRepository bikeRepository, IValidationService<CreateBikeViewModel> validator, IMapper mapper, ITagRepository tagRepository, IPhotoRepository photoRepository)
     {
         _bikeRepository = bikeRepository;
         _validator = validator;

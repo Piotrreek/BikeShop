@@ -1,0 +1,23 @@
+﻿@model SelectGenderViewModel
+
+@{
+    var selectList = new List<SelectListItem>()
+    {
+        new SelectListItem("Male", "1"),
+        new SelectListItem("Female", "2"),
+      
+    };
+    
+    
+}
+
+<div class="form-group">
+    <div class="form-group-desc">
+        <div>
+            <label asp-for="UserGender">User Gender:</label>
+        </div>
+        <span asp-validation-for="UserGender"></span>
+    </div>
+        
+    <select class="form-field" asp-for="UserGender" asp-items="selectList"> </select> 
+</div>
