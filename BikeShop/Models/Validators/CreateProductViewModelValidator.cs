@@ -27,8 +27,8 @@ public class CreateProductViewModelValidator<T> : AbstractValidator<T> where T :
                 if (files == null) return true;
                 foreach (var file in files)
                 {
-                    if (file.ContentType.Equals("image/jpeg") || file.ContentType.Equals("image/jpg") ||
-                        file.ContentType.Equals("image/png") == false) return false;
+                    if ((file.ContentType == "image/jpeg" || file.ContentType.Equals("image/jpg") ||
+                        file.ContentType.Equals("image/png")) == false) return false;
                 }
 
                 return true;

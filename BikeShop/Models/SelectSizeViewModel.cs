@@ -1,6 +1,6 @@
 ﻿namespace BikeShop.Models;
 
-public class SelectColorViewModel
+public class SelectSizeViewModel
 {
     public int Size { get; set; }
 }

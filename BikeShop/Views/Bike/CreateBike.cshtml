@@ -14,11 +14,11 @@
 
         @await Component.InvokeAsync("ColorSelectList")
 
-        <partial name="Partials/_SizeSelectList"/>
+        <partial name="Partials/_SizeSelectList" model="new SelectSizeViewModel()"/>
         
-        <partial name="Partials/_SelectGender"/>
+        <partial name="Partials/_SelectGender" model="new SelectGenderViewModel()"/>
         
-        <partial name="Partials/_ProductionYear"/>
+        <partial name="Partials/_ProductionYear" model="new ProductionYearViewModel()"/>
         
         <partial name="Partials/_CreateProduct" model="Model"/>
         

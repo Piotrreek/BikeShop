@@ -71,9 +71,16 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
+// app.Use(async (context, next) =>
+// {
+//     await next();
+//     if (context.Response.StatusCode == 404 && !context.Response.HasStarted)
+//     {
+//         context.Request.Path = "/error/not-found";
+//         await next();
+//     }
+// });
 app.UseRouting();
-
 app.UseAuthentication();
 app.UseAuthorization();
 

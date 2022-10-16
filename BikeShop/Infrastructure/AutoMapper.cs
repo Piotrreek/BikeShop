@@ -10,5 +10,6 @@ public class AutoMapper : Profile
     {
         CreateMap<UserViewModel, User>();
         CreateMap<CreateBikeViewModel, Bike>();
+        CreateMap<Bike, BikeViewModel>();
     }
 }

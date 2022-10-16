@@ -1,5 +1,6 @@
 ﻿using BikeShop.Commands;
 using BikeShop.Models;
+using BikeShop.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -17,14 +18,14 @@ public class BikeController : Controller
     }
     
     [Authorize]
-    [HttpGet("create-bike")]
+    [HttpGet("create")]
     public  IActionResult CreateBike()
     {
         return View();
     }
     
     [Authorize]
-    [HttpPost("create-bike")]
+    [HttpPost("create")]
     public async Task<IActionResult> CreateBike([FromForm] CreateBikeViewModel model)
     {
         var command = new CreateBikeCommand(model, ModelState);
@@ -34,5 +35,14 @@ public class BikeController : Controller
             return View(model);
         
         return RedirectToAction("CreateBike");
+    }
+
+    [HttpGet("get-by-id/{id:guid}")]
+    public async Task<IActionResult> GetById(Guid id)
+    {
+        var query = new GetBikeByIdQuery(id);
+        var response = await _mediator.Send(query);
+        
+        return View(response);
     }
 }

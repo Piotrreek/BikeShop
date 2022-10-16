@@ -1,4 +1,5 @@
 ﻿using BikeShop.Entities;
+using BikeShop.Models;
 using BikeShop.Services;
 
 namespace BikeShop.Repositories;
@@ -31,8 +32,6 @@ public class PhotoRepository : IPhotoRepository
         };
 
         await _context.Photos.AddAsync(photo);
-        await _context.SaveChangesAsync();
-
         return photo;
     }
 }
