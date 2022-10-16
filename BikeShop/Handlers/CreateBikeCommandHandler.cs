@@ -41,6 +41,8 @@ public class CreateBikeCommandHandler : IRequestHandler<CreateBikeCommand, bool>
         foreach (var photo in request.Model.FormPhotos ?? new FormFileCollection())
             bike.Photos.Add(await _photoRepository.UploadPhoto(photo));
         
+        bike.Photos.Add(await _photoRepository.UploadPhoto(request.Model.Thumbnail, true));
+        
         await _bikeRepository.InsertBike(bike);
         return true;
     }
