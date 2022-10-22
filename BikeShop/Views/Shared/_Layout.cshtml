@@ -18,8 +18,9 @@
     <main>
         @RenderBody()
     </main>
-<partial name="Partials/_Footer"/>
+    <partial name="Partials/_Footer"/>
 
     <script src="~/js/main.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
