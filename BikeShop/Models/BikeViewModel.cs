@@ -11,8 +11,8 @@ public class BikeViewModel
     public bool InStock { get; set; }
     public int AvailableQuantity { get; set; }
     public string Brand { get; set; }
-    public List<ImageDto> ImageSources { get; set; } = new();
-    public ImageDto ThumbnailSource { get; set; }
+    public List<string> ImageNames { get; set; } = new List<string>();
+    public string ThumbnailName { get; set; }
     public Color Color { get; set; }
     public Size Size { get; set; }
     public Gender UserGender { get; set; }

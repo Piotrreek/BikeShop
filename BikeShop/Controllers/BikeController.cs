@@ -42,7 +42,6 @@ public class BikeController : Controller
     {
         var query = new GetBikeByIdQuery(id);
         var response = await _mediator.Send(query);
-        
         return View(response);
     }
 }

@@ -1,40 +1,69 @@
 ﻿@model BikeViewModel
 @{
     ViewData["Title"] = Model.Name;
-    var imageDataUrls = new List<string>();
-    foreach (var imageSource in Model.ImageSources)
-    {
-        imageDataUrls.Add($"data:{imageSource.ContentType};base64,{Convert.ToBase64String(imageSource.Source)}");
-    }
 }
 
 <div class="product">
-    <div class="image-container">
-        <img class="product__image" src="@imageDataUrls[0]" alt="@Model.ImageSources[0].Name"/>
-    </div>
+    @foreach (var imageName in Model.ImageNames)
+    {
+        <div class="image-container">
+            <img class="product__image" src="@Url.Action("GetImage", "Photo", new { name = imageName })" alt=@imageName/>
+            <a class="prev" onclick="plusSlides(-1)">❮</a>
+            <a class="next" onclick="plusSlides(1)">❯</a>
+        </div>
+    }
     <div class="product__description">
         <h1 class="product__description__header">@Model.Name</h1>
         <div class="product__description__primary-info">
-            <div class="product__description__primary-info__important">
+            <div class="product__description__primary-info">
+                <div class="product__description__primary-info__important">
+                    <div>
+                        <p>In stock:</p> <span>@Model.InStock</span></div>
+                    <div>
+                        <p>Price:</p> <span>@Model.Price</span></div>
+                    <div>
+                        <p>Brand:</p> <span>@Model.Brand</span></div>
+                    <div>
+                        <p>Available Quantity:</p> <span>@Model.AvailableQuantity</span></div>
+                    <div>
+                        <p>User Gender:</p> <span>@Model.UserGender</span></div>
+                    <div>
+                        <p>Color:</p> <span>@Model.Color.Name</span></div>
+                    <div>
+                        <p>Size:</p> <span>@Model.Size</span></div>
+                </div>
                 <div>
-                    <p>In stock:</p> <span>@Model.InStock</span></div>
-                <div>
-                    <p>Price:</p> <span>@Model.Price</span></div>
-                <div>
-                    <p>Brand:</p> <span>@Model.Brand</span></div>
-                <div>
-                    <p>Available Quantity:</p> <span>@Model.AvailableQuantity</span></div>
-                <div>
-                    <p>User Gender:</p> <span>@Model.UserGender</span></div>
-                <div>
-                    <p>Color:</p> <span>@Model.Color.Name</span></div>
-                <div>
-                    <p>Size:</p> <span>@Model.Size</span></div>
-            </div>
-            <div>
-                <h2 class="product__description__primary-info__description">Description</h2>
-                @Model.Description
+                    <h2 class="product__description__primary-info__description">Description</h2>
+                    @Model.Description
+                </div>
             </div>
         </div>
     </div>
 </div>
+
+@section Scripts
+{
+    <script>
+    let slideIndex = 1;
+    showSlides(slideIndex);
+    
+    function plusSlides(n) {
+      showSlides(slideIndex += n);
+    }
+    
+    function currentSlide(n) {
+      showSlides(slideIndex = n);
+    }
+    
+    function showSlides(n) {
+      let i;
+      let slides = document.getElementsByClassName("image-container");
+      if (n > slides.length) {slideIndex = 1}    
+      if (n < 1) {slideIndex = slides.length}
+      for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";  
+      }
+      slides[slideIndex-1].style.display = "flex";  
+    }
+    </script>
+}
