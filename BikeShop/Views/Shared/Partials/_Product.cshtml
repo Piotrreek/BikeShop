@@ -1,0 +1,25 @@
+﻿@using Type = BikeShop.Entities.Enums.Type
+@model ProductViewModel
+
+@{
+    string controllerName;
+    switch (Model.Type)
+    {
+        case Type.Bike:
+            controllerName = "bike";
+            break;
+        default:
+            controllerName = "unknown";
+            break;
+    }
+}
+
+<div class="product-card">
+    <a asp-controller="@controllerName" asp-action="GetById" asp-route-id="@Model.Id" target="_blank">
+        <img class="product-card__image" src="@Url.Action("GetImage", "Photo", new { name = Model.ThumbnailName })" alt="@Model.ThumbnailName"/>
+        <div class="product-card__info">
+            <p>@Model.Name</p>
+            <p>Price: <span>$@Model.Price</span></p>
+        </div>
+    </a>
+</div>
