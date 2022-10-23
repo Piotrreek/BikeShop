@@ -1,0 +1,15 @@
+﻿@model List<ProductViewModel>
+@{
+    ViewData["Title"] = "All products";
+}
+<div>
+    <div class="product__filters">
+        
+    </div>
+    <div class="products">
+        @foreach (var product in Model)
+        {
+            <partial model=@product name="Partials/_Product"/>
+        }
+    </div>
+</div>
